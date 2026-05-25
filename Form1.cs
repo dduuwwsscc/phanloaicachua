@@ -35,8 +35,7 @@ namespace phanLoaiCaChua
         private string _lastLoggedLabel = "none";
 
         // ================= TOMATO DETECTION FILTER =================
-        // Chỉ nhận quả nằm trong vùng băng tải. Vùng dưới ảnh thường là nền gỗ/dây điện,
-        // YOLO đôi khi bắt nhầm thành quả vàng nên cần loại trước khi phân loại màu.
+        
         private const double TOMATO_ROI_X_MIN = 0.02;
         private const double TOMATO_ROI_X_MAX = 0.98;
         private const double TOMATO_ROI_Y_MIN = 0.02;
@@ -45,9 +44,7 @@ namespace phanLoaiCaChua
         private const double TOMATO_ASPECT_MAX = 1.65;
 
         // ================= EMPTY BELT BASELINE FOR GREEN TOMATO =================
-        // Khi bắt đầu mở camera, app sẽ lấy nền băng tải trong vài giây lúc chưa đặt quả.
-        // Fallback bắt quả xanh chỉ hoạt động sau khi có nền này, và chỉ bắt vùng xanh
-        // khác nền băng tải để tránh nhận cả băng tải là quả xanh.
+      
         private Mat _emptyBeltBaselineRoi = null;
         private bool _emptyBeltBaselineReady = false;
         private DateTime _emptyBeltBaselineStartedAt = DateTime.MinValue;
