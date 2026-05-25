@@ -1,118 +1,16 @@
 /*
-  =====================================================================
-  ESP32-S3 PHAN LOAI CA CHUA - ALL SERVO PUSH TOGETHER
-  =====================================================================
-
-  Huong xu ly moi:
-  ------------------------------------------------------------
-  - Khong dieu khien rieng tung servo de day nua.
-  - Khi can day vat ra, ca 3 servo se cung day:
-      Servo1 = 180 do
-      Servo2 = 180 do
-      Servo3 = 180 do
-
-    Sau do ca 3 servo cung thu ve:
-      Servo1 = 0 do
-      Servo2 = 0 do
-      Servo3 = 0 do
-
-  Van giu logic cam bien:
-  ------------------------------------------------------------
-  red:
-    Bang tai chay.
-    Doi Sensor1 phat hien vat.
-    Bang tai chay them SENSOR_EXTRA_RUN_MS.
-    Dung bang tai.
-    Doi WAIT_BEFORE_PUSH_MS.
-    Ca 3 servo cung day ra 180 do.
-    Giu PUSH_HOLD_MS.
-    Ca 3 servo cung thu ve 0 do.
-
-  yellow:
-    Dung Sensor2, sau do ca 3 servo cung day.
-
-  green:
-    Dung Sensor3, sau do ca 3 servo cung day.
-
-  error:
-    Bang tai chay ERROR_BELT_RUN_MS roi dung, khong day servo.
-
-  Pin map hien tai:
-  ------------------------------------------------------------
-  Servo1: GPIO17
-  Servo2: GPIO18
-  Servo3: GPIO16
-
-  Sensor1 active LOW: GPIO10
-  Sensor2 active LOW: GPIO12
-  Sensor3 active LOW: GPIO11
-
-  L298:
-  EN : GPIO38
-  IN1: GPIO41
-  IN2: GPIO42
-
-  LED status: GPIO48
-
-  Neu ban muon quay ve pin trong anh cu:
-  ------------------------------------------------------------
-  Doi:
-    SERVO1_PIN = 37
-    SERVO2_PIN = 36
-    SERVO3_PIN = 35
-
-  Thu vien can cai:
-  ------------------------------------------------------------
-  Arduino IDE -> Library Manager -> tim "ESP32Servo" -> Install
-
-  Lenh UART baud 115200:
-  ------------------------------------------------------------
-  red       : chay bang tai den Sensor1, sau do ca 3 servo day
-  yellow    : chay bang tai den Sensor2, sau do ca 3 servo day
-  green     : chay bang tai den Sensor3, sau do ca 3 servo day
-  error     : bang tai chay 7s roi dung
-
-  push      : test ca 3 servo day 180 do roi thu ve 0 do
-  home      : ca 3 servo ve 0 do
-  all 0     : ca 3 servo ve 0 do
-  all 180   : ca 3 servo ve 180 do
-
-  sensor    : doc 3 cam bien
-  status    : hien trang thai
-  stop      : dung khan cap, tat bang tai, servo ve 0 do
-
-  belt on   : bat bang tai thu cong
-  belt off  : tat bang tai thu cong
-  belt fwd  : chieu thuan
-  belt rev  : chieu nguoc
-
-  help      : hien danh sach lenh
-
-  Chu y:
-  ------------------------------------------------------------
-  - Cam bien tich cuc muc thap:
-      LOW  / raw=0 => CO VAT
-      HIGH / raw=1 => KHONG CO VAT
-
-  - MG996 can nguon rieng 5V - 6V du dong.
-  - GND nguon servo phai noi chung GND ESP32-S3.
-*/
-
+  
 #include <Arduino.h>
 #include <WiFi.h>
 #include <ESP32Servo.h>
 
 // ======================= PIN MAP =======================
 
-// Pin servo hien tai sau khi sua mach
+
 #define SERVO1_PIN       17
 #define SERVO2_PIN       18
 #define SERVO3_PIN       16
 
-// Neu muon dung pin theo anh cu, bo comment 3 dong duoi va comment 3 dong tren
-// #define SERVO1_PIN       37
-// #define SERVO2_PIN       36
-// #define SERVO3_PIN       35
 
 #define SENSOR1_PIN      10
 #define SENSOR2_PIN      12
